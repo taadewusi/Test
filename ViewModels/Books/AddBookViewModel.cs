@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test.Models.Books
+namespace ViewModels.Category
 {
-    public class Book
+    public class AddBookViewModel
     {
         [Key]
         public Guid BookId { get; set; }
@@ -18,6 +18,5 @@ namespace Test.Models.Books
         public int Pages { get; set; }
         public string CategoryId { get; set; }
         public string CategoryName { get; set; }
-      
     }
 }

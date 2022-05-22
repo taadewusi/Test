@@ -9,11 +9,11 @@ using Test.DataTiers;
 
 #nullable disable
 
-namespace Test.API.Migrations
+namespace Test.DataTiers.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220519154909_V2")]
-    partial class V2
+    [Migration("20220522151238_v4")]
+    partial class v4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,11 +34,11 @@ namespace Test.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Category")
+                    b.Property<string>("CategoryId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CategoryId")
+                    b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -54,7 +54,7 @@ namespace Test.API.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("Test.Models.Category.Category", b =>
+            modelBuilder.Entity("Test.Models.Category.BookCategory", b =>
                 {
                     b.Property<Guid>("CategoryId")
                         .ValueGeneratedOnAdd()

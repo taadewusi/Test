@@ -47,7 +47,7 @@ namespace Test.API
             cbuilder.RegisterGeneric(typeof(Repository<>))
             .As(typeof(IRepository<>))
             .InstancePerLifetimeScope();
-
+            cbuilder.AddScoped<IRepository<T>, Repository<T>>();
             cbuilder.RegisterModule(new DataModule());
         }
 
