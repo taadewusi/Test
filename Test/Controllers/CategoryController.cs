@@ -91,12 +91,14 @@ namespace Test.API.Controllers
                 {
                     return BadRequest("Category already exist");
                 }
+                Guid gi  = Guid.NewGuid();
                 var movie = new BookCategory()
                 {
 
-                    CategoryId = model.CategoryId,
+                    CategoryId = gi,
                     CategoryName = model.CategoryName,          
-                    Description = model.Description             
+                    Description = model.Description,
+                    Favorite = model.Favorite,
 
                 };
                 _category.Add(movie);

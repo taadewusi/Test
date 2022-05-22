@@ -19,8 +19,7 @@ namespace Test.API.Controllers
             _books = book;
             _mapper = mapper;
         }
-
-
+        
         [HttpGet, Route("get-all")]
 
         public IActionResult GetAll()
@@ -90,13 +89,17 @@ namespace Test.API.Controllers
                 {
                     return BadRequest("Book already exist");
                 }
+                Guid g = Guid.NewGuid();
                 var movie = new Book()
                 {
-
+                    BookId = g,
+                    BookName= model.BookName,
+                    Pages = model.Pages,
                     CategoryId = model.CategoryId,
                     CategoryName = model.CategoryName,
-                    Description = model.Description
-
+                    Description = model.Description,
+                    Favorite = model.Favorite,              
+                    
                 };
                 _books.Add(movie);
                 _books.Save();

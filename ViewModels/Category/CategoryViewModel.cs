@@ -15,5 +15,6 @@ namespace ViewModels.Category
         [Required(ErrorMessage = "Category can not be blank")]
         public string CategoryName { get; set; }
         public string Description { get; set; }
+        public bool Favorite { get; set; }
     }
 }

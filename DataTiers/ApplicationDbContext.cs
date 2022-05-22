@@ -18,7 +18,7 @@ namespace Test.DataTiers
 
 
         public DbSet<Book> Books { get; set; }
-        public DbSet<BookCategory>  Categories { get; set; }
+        public DbSet<BookCategory> BookCategories { get; set; }
       
     }
 }

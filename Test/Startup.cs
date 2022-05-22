@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Test.DataTiers;
 using Test.DataTiers.Repositories;
-//using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using ViewModels.Mapping;
 
 namespace Test.API
@@ -24,13 +24,9 @@ namespace Test.API
             services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(
                    Configuration.GetConnectionString("ConStr")));
-            //services.AddDatabaseDeveloperPageExceptionFilter();
-
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
            
             services.AddAutoMapper(c => c.AddProfile<AutoMapping>(), typeof(Startup));
-
+           
             //services.AddScoped<ILoggerManager, LoggerManager>();
 
             services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
@@ -47,7 +43,7 @@ namespace Test.API
             cbuilder.RegisterGeneric(typeof(Repository<>))
             .As(typeof(IRepository<>))
             .InstancePerLifetimeScope();
-            cbuilder.AddScoped<IRepository<T>, Repository<T>>();
+           
             cbuilder.RegisterModule(new DataModule());
         }
 
@@ -60,7 +56,7 @@ namespace Test.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test.Api v1"));
             }
-
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();

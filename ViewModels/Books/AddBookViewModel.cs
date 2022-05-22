@@ -18,5 +18,6 @@ namespace ViewModels.Category
         public int Pages { get; set; }
         public string CategoryId { get; set; }
         public string CategoryName { get; set; }
+        public bool Favorite { get; set; }
     }
 }
