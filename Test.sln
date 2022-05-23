@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.API", "Test\Test.API.csproj", "{DC91C072-9B1E-469A-B205-D4598AEE5569}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.API", "Test\Test.API.csproj", "{DC91C072-9B1E-469A-B205-D4598AEE5569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Models", "Models\Test.Models.csproj", "{349E5414-40F9-4024-B969-2E53E490F421}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Models", "Models\Test.Models.csproj", "{349E5414-40F9-4024-B969-2E53E490F421}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.DataTiers", "DataTiers\Test.DataTiers.csproj", "{355679B5-13A3-48F8-ACAE-FDEACABAD772}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.DataTiers", "DataTiers\Test.DataTiers.csproj", "{355679B5-13A3-48F8-ACAE-FDEACABAD772}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{CF7F0421-35B3-44A8-A679-D6C132675211}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "ViewModels\ViewModels.csproj", "{CF7F0421-35B3-44A8-A679-D6C132675211}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Test", "Test.Test\Test.Test.csproj", "{4B902A98-E60A-4C5C-91FF-2157DBE2E5E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{CF7F0421-35B3-44A8-A679-D6C132675211}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF7F0421-35B3-44A8-A679-D6C132675211}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF7F0421-35B3-44A8-A679-D6C132675211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B902A98-E60A-4C5C-91FF-2157DBE2E5E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B902A98-E60A-4C5C-91FF-2157DBE2E5E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B902A98-E60A-4C5C-91FF-2157DBE2E5E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B902A98-E60A-4C5C-91FF-2157DBE2E5E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

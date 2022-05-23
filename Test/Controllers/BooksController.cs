@@ -79,6 +79,39 @@ namespace Test.API.Controllers
             return Ok(books);
         }
 
+        [HttpPut, Route("set-as-fav/{id}")]
+        public IActionResult SetAsFav(Guid id)
+        {
+            var books = _books.GetById(id);
+            if (books == null)
+            {
+                return Ok(new { message = "Books not available!" });
+            }
+            else
+            {
+                books.Favorite = true;
+                _books.Update(books);
+                _books.Save();
+                return Ok(books);
+            }
+        }
+        [HttpPut, Route("remove-as-fav/{id}")]
+        public IActionResult RemoveAsFav(Guid id)
+        {
+            var books = _books.GetById(id);
+            if (books == null)
+            {
+                return Ok(new { message = "Books not available!" });
+            }
+            else
+            {
+                books.Favorite = false;
+                _books.Update(books);
+                _books.Save();
+                return Ok(books);
+            }
+        }
+
         [HttpPost, Route("add-book")]
         public IActionResult AddBook([FromBody] AddBookViewModel model)
         {

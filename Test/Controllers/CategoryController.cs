@@ -120,7 +120,42 @@ namespace Test.API.Controllers
                // return CustomResult(System.Net.HttpStatusCode.InternalServerError, Constants.ExceptionCode, Constants.DefaultExceptionFriendlyMessage);
             }
         }
+        [HttpPut, Route("set-as-fav/{id}")]
+        public IActionResult SetAsFav(Guid id)
+        {
+            var cate = _category.GetById(id);
+            if (cate == null)
+            {
 
+                return Ok(new { message = "Category not available!" });
+            }
+            else
+            {
+                cate.Favorite = true;
+                _category.Update(cate);
+                _category.Save();
+                return Ok(cate);
+
+            }
+        }
+
+        [HttpPut, Route("remove-as-fav/{id}")]
+        public IActionResult RemoveAsFav(Guid id)
+        {
+            var cate = _category.GetById(id);
+            if (cate == null)
+            {
+
+                return Ok(new { message = "Category not available!" });
+            }
+            else
+            {
+                cate.Favorite = false;
+                _category.Update(cate);
+                _category.Save();
+                return Ok(cate);
+            }
+        }
         [HttpPut, Route("update-category")]
         public IActionResult UpdateCategory([FromBody] CategoryViewModel model)
         {
