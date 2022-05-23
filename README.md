@@ -1,5 +1,4 @@
-# Test ASP.NET Core & EntityFramework Core Based Startup Template
-
+# Test Solution ASP.NET Core & EntityFramework Core Based 
 This project contains the solution to the coding challenge using ASP.NET Core and EntityFramework Core.
 Prerequirements
 
