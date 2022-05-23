@@ -17,4 +17,13 @@ namespace ViewModels.Category
         public string Description { get; set; }
         public bool Favorite { get; set; }
     }
+
+    public class AddBookToCategoryViewModel
+    {
+        [Required(ErrorMessage = "Category Id not be blank")]
+        public string CategoryId { get; set; }
+
+        [Required(ErrorMessage = "Category name can not be blank")]
+        public string CategoryName { get; set; }
+    }
 }

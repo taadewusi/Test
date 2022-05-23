@@ -21,57 +21,74 @@ namespace Test.API.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// This endpoint returns all categories.
+        ///
+        /// </summary>
+        /// <param></param>
+        /// <returns>All Categories as a JSON list</returns>
 
-        [HttpGet, Route("get-all")]
-      
+        [HttpGet, Route("get-all")]      
         public IActionResult GetAll()
         {
-            //[FromQuery] MovieParameters parameters
             try
             {
-                var moviesExist = "Categories Retrieved Successfully";
-                var moviesDoesNotExist = "No Category Found";
+               
+                var category = _category.GetAll();
 
-               // var movies = _category.GetAll(parameters);
-                var movies = _category.GetAll();
-
-                if (movies.Count > 0)
+                if (category.Count > 0)
                 {
-                    return Ok(movies);
+                    return Ok(category);
                 }
                 else
                 {
                     return NoContent();
                 }
-                //if (movies.MetaData.TotalCount > 0)
-                //{
-                //    return Ok(new Response<PagedList<Movie>>
-                //    {
-                //        MetaData = movies.MetaData,
-                //        Data = movies,
-                //        Status = Constants.SuccessCode,
-                //        Message = moviesExist
-                //    });
-                //}
-                //return Ok(new Response<PagedList<Movie>>
-                //{
-                //    MetaData = movies.MetaData,
-                //    Data = movies,
-                //    Status = Constants.NoData,
-                //    Message = moviesDoesNotExist
-                //});
+               
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);  
-                //_logger.LogError($"AnywakaAPI: - {MethodBase.GetCurrentMethod()?.Name} - {ex.Message}");
-
-                //return CustomResult(System.Net.HttpStatusCode.InternalServerError, Constants.ExceptionCode, Constants.DefaultExceptionFriendlyMessage);
             }
 
         }
 
+        /// <summary>
+        /// This endpoint returns all favorite categories.
+        ///
+        /// </summary>
+        /// <param></param>
+        /// <returns>All favorite categories as a JSON list</returns>
+        [HttpGet, Route("get-all-fav")]
+        public IActionResult GetAllFave()
+        {
+            try
+            {
+                var category = _category.GetAll().Where(x=>x.Favorite==true);
 
+                if (category!=null)
+                {
+                    return Ok(category);
+                }
+                else
+                {
+                    return NoContent();
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// This endpoint returns a particular category with the supplied ID.
+        ///
+        /// </summary>
+        /// <param></param>
+        /// <returns>A category as a JSON</returns>
         [HttpGet, Route("get-by-id/{id}")]        
         public IActionResult GetById(Guid id)
         {
@@ -81,6 +98,12 @@ namespace Test.API.Controllers
             return Ok(movie);
         }
 
+        /// <summary>
+        /// This endpoint adds a new category.
+        ///
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>A new category added as a JSON</returns>
         [HttpPost, Route("add-category")]
         public IActionResult AddCategory([FromBody] AddCategoryViewModel model)
         {
@@ -103,23 +126,16 @@ namespace Test.API.Controllers
                 };
                 _category.Add(movie);
                 _category.Save();
-               // _logger.LogInformation($"New Movie Created - {JsonConvert.SerializeObject(movie)}");
                 return Ok(movie);
-                //return Ok(new Response<Category>
-                //{
-                //    Message = "Movie added successfully",
-                //    Status = Constants.SuccessCode,
-                //    Data = movie
-
-                //});
+                
             }
             catch (Exception ex)
             {
-               // _logger.LogError($"{MethodBase.GetCurrentMethod().Name} - {ex.Message}");
+
                return BadRequest(ex.Message);
-               // return CustomResult(System.Net.HttpStatusCode.InternalServerError, Constants.ExceptionCode, Constants.DefaultExceptionFriendlyMessage);
             }
         }
+        
         [HttpPut, Route("set-as-fav/{id}")]
         public IActionResult SetAsFav(Guid id)
         {
@@ -156,6 +172,7 @@ namespace Test.API.Controllers
                 return Ok(cate);
             }
         }
+       
         [HttpPut, Route("update-category")]
         public IActionResult UpdateCategory([FromBody] CategoryViewModel model)
         {
@@ -167,7 +184,6 @@ namespace Test.API.Controllers
 
             return Ok(_category.GetById(model.CategoryId));
         }
-
 
         [HttpDelete, Route("delete-category/{id}")]
         public IActionResult DeleteCategory(Guid id)

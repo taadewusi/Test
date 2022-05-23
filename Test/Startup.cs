@@ -5,6 +5,7 @@ using Test.DataTiers;
 using Test.DataTiers.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using ViewModels.Mapping;
+using System.Reflection;
 
 namespace Test.API
 {
@@ -35,7 +36,12 @@ namespace Test.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Test.Api", Version = "v1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);  
             });
+            
+            
         }
 
         public void ConfigureContainer(ContainerBuilder cbuilder)

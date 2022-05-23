@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModels.Category;
 using Test.Models.Category;
+using Test.Models.Books;
 
 namespace ViewModels.Mapping
 {
@@ -14,6 +15,7 @@ namespace ViewModels.Mapping
         public AutoMapping()
         {
             CreateMap<BookCategory, CategoryViewModel>().ReverseMap();
+            CreateMap<Book, BookViewModel>().ReverseMap();
         }
     }
 }
