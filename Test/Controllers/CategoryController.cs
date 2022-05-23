@@ -135,7 +135,13 @@ namespace Test.API.Controllers
                return BadRequest(ex.Message);
             }
         }
-        
+
+        /// <summary>
+        /// This endpoint sets a  category as a favorite.
+        ///
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Updated category as a JSON</returns>
         [HttpPut, Route("set-as-fav/{id}")]
         public IActionResult SetAsFav(Guid id)
         {
@@ -155,6 +161,12 @@ namespace Test.API.Controllers
             }
         }
 
+        /// <summary>
+        /// This endpoint removes a  category as a favorite.
+        ///
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Updated category as a JSON</returns>
         [HttpPut, Route("remove-as-fav/{id}")]
         public IActionResult RemoveAsFav(Guid id)
         {
@@ -172,7 +184,13 @@ namespace Test.API.Controllers
                 return Ok(cate);
             }
         }
-       
+
+        /// <summary>
+        /// This endpoint update a  category as a favorite.
+        ///
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Updated category as a JSON</returns>
         [HttpPut, Route("update-category")]
         public IActionResult UpdateCategory([FromBody] CategoryViewModel model)
         {
@@ -185,6 +203,12 @@ namespace Test.API.Controllers
             return Ok(_category.GetById(model.CategoryId));
         }
 
+        /// <summary>
+        /// This endpoint deletes a  category.
+        ///
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Updated category as a JSON</returns>
         [HttpDelete, Route("delete-category/{id}")]
         public IActionResult DeleteCategory(Guid id)
         {

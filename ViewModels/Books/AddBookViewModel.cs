@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,8 @@ namespace ViewModels.Category
 {
     public class AddBookViewModel
     {
-        [Key]
-        public Guid BookId { get; set; }
+        //[Key]
+        //public Guid BookId { get; set; }
 
         [Required(ErrorMessage = "Book Title can not be blank")]
         public string BookName { get; set; }
@@ -18,6 +19,8 @@ namespace ViewModels.Category
         public int Pages { get; set; }
         public string CategoryId { get; set; }
         public string CategoryName { get; set; }
+       
+        [DefaultValue(false)]
         public bool Favorite { get; set; }
     }
 }

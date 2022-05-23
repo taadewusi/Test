@@ -76,6 +76,11 @@ namespace Test.API.Controllers
 
         }
 
+        /// <summary>
+        /// This endpoint returns the list of all favorite books as a Json list.      
+        /// </summary>
+        /// <param></param>
+        /// <returns>The list of favorite books</returns>
         [HttpGet, Route("get-all-fav")]
         public IActionResult GetAllFav()
         {
@@ -120,6 +125,11 @@ namespace Test.API.Controllers
             return Ok(books);
         }
 
+        /// <summary>
+        /// This endpoint takes a model to add a new book to a collection.      
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>The book added</returns>
         [HttpPost, Route("add-book")]
         public IActionResult AddBook([FromBody] AddBookViewModel model)
         {
@@ -129,7 +139,41 @@ namespace Test.API.Controllers
                 if (checker.Any())
                 {
                     return BadRequest("Book already exist");
+                }               
+                if (!string.IsNullOrEmpty(model.CategoryName))
+                {
+                    if (model.CategoryName != "string")
+                    {
+
+
+                        var cat = _category.GetAll().Where(x => x.CategoryName == model.CategoryName);
+                        if (cat.Any())
+                        {
+
+                        }
+                        else
+                        {
+                            Guid gi = Guid.NewGuid();
+                            var newcat = new BookCategory()
+                            {
+
+                                CategoryId = gi,
+                                CategoryName = model.CategoryName,
+
+                            };
+                            _category.Add(newcat);
+                            _category.Save();
+                            model.CategoryId = gi.ToString();
+                        }
+
+                    }
+                    else
+                    {
+                        model.CategoryName = "";
+                        model.CategoryId = "";
+                    }
                 }
+               
                 Guid g = Guid.NewGuid();
                 var movie = new Book()
                 {
@@ -162,6 +206,11 @@ namespace Test.API.Controllers
             }
         }
 
+        /// <summary>
+        /// This endpoint sets a book as favorite.      
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The book updated as a json</returns>
         [HttpPut, Route("set-as-fav/{id}")]
         public IActionResult SetAsFav(Guid id)
         {
@@ -179,6 +228,11 @@ namespace Test.API.Controllers
             }
         }
        
+        /// <summary>
+        /// This endpoint remove a book from favorite collection.      
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The book updated as a json</returns>
         [HttpPut, Route("remove-as-fav/{id}")]
         public IActionResult RemoveAsFav(Guid id)
         {
@@ -196,7 +250,13 @@ namespace Test.API.Controllers
             }
         }
 
-        [HttpPut, Route("add-to-category/{BookId}")]
+        /// <summary>
+        /// This endpoint adds a book to a category, can be used to update the category of a book.      
+        /// </summary>
+        /// <param name="BookId"></param>
+        /// /// <param name="CategoryId"></param>
+        /// <returns>The book updated as a json</returns>
+        [HttpPut, Route("add-to-category/{BookId}/{CategoryId}")]
         public IActionResult AddToCategory(Guid BookId, Guid CategoryId)
         {
             var books = _books.GetById(BookId);
@@ -222,18 +282,23 @@ namespace Test.API.Controllers
                 
             }
         }
-       
+
+        /// <summary>
+        /// This endpoint remove a book to a category.      
+        /// </summary>
+        /// <param name="BookId"></param>
+        /// /// <param name="CategoryId"></param>
+        /// <returns>The book updated as a json</returns>
         [HttpPut, Route("remove-from-category/{id}")]
-        public IActionResult RemoveFromCategory(Guid id)
+        public IActionResult RemoveFromCategory(Guid BookId, Guid CategoryId)
         {
-            var books = _books.GetById(id);
+            var books = _books.GetById(BookId);
             if (books == null)
             {
                 return BadRequest("Book not found!" );
             }
             else
             {
-
                 books.CategoryId ="";
                 books.CategoryName = "";
                 _books.Update(books);
@@ -241,7 +306,12 @@ namespace Test.API.Controllers
                 return Ok(books);
             }
         }
-      
+
+        /// <summary>
+        /// This endpoint update a book.      
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>The book updated as a json</returns>
         [HttpPut, Route("update-book")]
         public IActionResult UpdateBook([FromBody] BookViewModel model)
         {
@@ -252,6 +322,11 @@ namespace Test.API.Controllers
             return Ok(_books.GetById(model.BookId));
         }
 
+        /// <summary>
+        /// This endpoint delete a book.      
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>/returns>
         [HttpDelete, Route("delete-book/{id}")]
         public IActionResult DeleteBook(Guid id)
         {
